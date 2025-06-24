@@ -1,0 +1,4 @@
+FastAPI
+joblib
+pydantic
+uvicorn
