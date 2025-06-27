@@ -14,8 +14,6 @@ async function handlePrediction(e) {
 
   const formData = new FormData(e.target);
   const patientData = {
-    PatientName: formData.get('PatientName') || 'Paciente Anónimo',
-    PatientID: formData.get('PatientID') || 'P-001',
     Pregnancies: parseInt(formData.get('Pregnancies')),
     Glucose: parseFloat(formData.get('Glucose')),
     BloodPressure: parseFloat(formData.get('BloodPressure')),
