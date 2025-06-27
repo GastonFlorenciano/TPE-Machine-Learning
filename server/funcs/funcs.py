@@ -15,7 +15,10 @@ class Paciente(BaseModel):
 
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "train", "modelo_diabetes.pkl")
 
-model = joblib.load(MODEL_PATH)
+model_data = joblib.load(MODEL_PATH)
+
+model = model_data["model"]
+accuracy = model_data["accuracy"]
 
 def predict(body: Paciente) -> dict:
     data = [[
@@ -34,4 +37,7 @@ def predict(body: Paciente) -> dict:
         msg = "El paciente NO tiene diabetes"
     else:
         msg = "El paciente tiene diabetes"
-    return { "message": msg }
+    return { 
+            "message": msg,
+            "accuracy": round(accuracy)
+            }

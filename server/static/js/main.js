@@ -43,6 +43,8 @@ async function handlePrediction(e) {
     currentResult = patientData;
     currentResult.prediction = result.message;
     currentResult.hasDiabetes = !result.message.includes('NO tiene');
+    currentResult.modelAccuracy = result.accuracy || null;
+
 
     showResults();
   } catch (error) {
@@ -58,6 +60,7 @@ function showResults() {
   const resultIcon = document.getElementById('result-icon');
   const resultTitle = document.getElementById('result-title');
   const resultMessage = document.getElementById('result-message');
+  const accuracyDisplay = document.getElementById('accuracy-display');
 
   if (currentResult.hasDiabetes) {
     resultIcon.innerHTML = '<i class="fas fa-exclamation-triangle"></i>';
@@ -67,6 +70,12 @@ function showResults() {
     resultIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
     resultIcon.className = 'result-icon success';
     resultTitle.textContent = 'Sin Riesgo de Diabetes';
+  }
+
+  if (currentResult.modelAccuracy !== null) {
+    accuracyDisplay.textContent =
+      'Precisión del modelo: ' + currentResult.modelAccuracy + '%';
+    accuracyDisplay.style.display = 'block';
   }
 
   resultMessage.textContent = currentResult.prediction;
