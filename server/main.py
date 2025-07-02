@@ -28,8 +28,4 @@ app.add_middleware(
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-@app.get("/home", response_class=HTMLResponse)
-async def read_item(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
 app.include_router(router)
